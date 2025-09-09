@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Account</title>
+	<link rel="stylesheet" href="public/style.css">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+	<%- include ('header.ejs') %>
+		<main class="container flex flex-col gap-6 mx-auto m-6 p-6 bg-white/5 rounded-lg shadow-lg">
+				<h1 class="text-3xl text-yellow-600 border rounded-lg text-center mt-5 mb-5">
+					Hello <%= user.firstname %>
+				</h1>
+				<a href="http://localhost:3000/user/disconnect" class="text-red-600 text-center">Disconnect</a>
+		</main>
+</body>
+
+</html>
