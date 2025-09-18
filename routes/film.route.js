@@ -5,7 +5,9 @@ const router = express.Router();
 
 // Mapping entre route et controleur
 router.get('/', filmController.show);
-router.get('/:id', filmController.remove);
+router.get('/presentation/:id', filmController.showFilmById);
+router.get('/favorites', filmController.showFavorites)
+router.delete('/:id', filmController.remove);
 router.post('/', filmController.add);
 
 

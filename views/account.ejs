@@ -5,17 +5,38 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Account</title>
-	<link rel="stylesheet" href="public/style.css">
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
 	<%- include ('header.ejs') %>
-		<main class="container flex flex-col gap-6 mx-auto m-6 p-6 bg-white/5 rounded-lg shadow-lg">
-				<h1 class="text-3xl text-yellow-600 border rounded-lg text-center mt-5 mb-5">
-					Hello <%= user.firstname %>
+		<main class="container flex flex-col gap-6 mx-auto m-6 p-6 bg-black/85 rounded-lg shadow-lg">
+			<h1 class="text-3xl text-white border rounded-lg text-center mt-5 mb-5 bg-white/5 rounded-lg shadow-lg">
+				Hello <%= user.firstname %> !
+			</h1>
+			<section>
+				<h1 class="text-3xl text-white border rounded-lg text-center mt-5 mb-5 bg-white/5 rounded-lg shadow-lg">
+					Favorites
 				</h1>
-				<a href="http://localhost:3000/user/disconnect" class="text-red-600 text-center">Disconnect</a>
+				<div class="flex flex-wrap justify-center gap-5">
+					<% if (films[0]) { %>
+					<% for (const film of films) { %>
+						<a href="http://localhost:3000/film/presentation/<%= film.id %>"
+							class="w-56 border rounded-lg p-3 text-center bg-white/5 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105">
+							<h3 class="text-white py-2">
+								<%= film.title %>
+							</h3>
+							<img src="<%= film.image %>" alt="<% film.title %>" class="w-full h-64 object-contain">
+							<% } %>
+						</a>
+						<% } else { %>
+							<h1 class="text-2xl mt-5 mb-5 w-full text-center">
+								You don't have any favorites yet
+							</h1>
+						<% } %>
+				</div>
+			</section>
+			<a href="http://localhost:3000/user/disconnect" class="text-white text-center bg-red-600 border inline-block px-4 py-2 rounded-lg hover:bg-red-500">Disconnect</a>
 		</main>
 </body>
 

@@ -49,7 +49,7 @@ const findByEmail = async (email) => {
 	const SELECT = "SELECT * FROM users WHERE email=?";
 	try {
 		const resultat = await connection.query(SELECT, email);
-		console.log(resultat[0][0]);
+		// console.log(resultat[0][0]);
 		
 		return resultat[0][0];
 	}

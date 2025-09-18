@@ -1,18 +1,17 @@
-<header class="flex p-4 items-center flex-col md:flex-row bg-gray-600">
-	<div class="flex-1">
-		<a id="Logo" href="http://localhost:3000/home" class="no-underline text-white text-3xl">ExpressMovie</a>
+<header class="flex justify-between p-4 items-center flex-col md:flex-row bg-black/85">
+	<div>
+		<a id="Logo" href="http://localhost:3000/home" class="text-white text-3xl">ExpressMovie</a>
 	</div>
-	<div class="flex-1 flex justify-around gap-5">
-		<a class="text-white text-2xl no-underline" href="http://localhost:3000/home">About</a>
-		<a class="text-white text-2xl no-underline" href="http://localhost:3000/home">Features</a>
-		<a class="text-white text-2xl no-underline" href="http://localhost:3000/user/login">
+	<div class="flex justify-around gap-10">
+		<div>
 			<% if (user) { %>
-				<a href="http://localhost:3000/user/account" class="text-xl text-yellow-600 text-center">
+				<a href="http://localhost:3000/user/account" class="text-2xl text-yellow-600 text-center">
 					<%= user.firstname %>
 				</a>
 				<% } else {%>
-					Login
-				<% } %>
-		</a>
+					<a class="text-white text-2xl hover:text-gray-300" href="http://localhost:3000/user/login">Login</a>
+					<% } %>
+						</a>
+		</div>
 	</div>
 </header>

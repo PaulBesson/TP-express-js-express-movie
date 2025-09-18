@@ -23,6 +23,30 @@ const show = async (req, res, next) => {
 	}
 }
 
+const showFilmById = async (req, res, next) => {
+	if (req.session.user) {
+		const film = await filmRepository.findById(req.params.id);
+
+		if (film) {
+			// console.log(film)
+			res.render('presentation', {
+				user: req.session.user,
+				film
+			})
+		}
+		else {
+			res.redirect('/');
+		}
+	}
+	else {
+		res.redirect('/');
+	}
+}
+
+const showFavorites = async (req, res, next) => {
+
+}
+
 const add = async (req, res, next) => {
 
 	filmSchema
@@ -31,7 +55,7 @@ const add = async (req, res, next) => {
 			req.session.firstname = req.body.firstname
 			const p = await filmRepository.save(req.body)
 			if (p) {
-				console.log(p);
+				console.log(`Adding user : ${p}`);
 				res.redirect('/film')
 			} else {
 				const films = await filmRepository.findAll()
@@ -57,4 +81,4 @@ const remove = async (req, res, next) => {
 	res.redirect('/film')
 }
 
-export default { show, add, remove };
+export default { show, add, remove, showFavorites, showFilmById };

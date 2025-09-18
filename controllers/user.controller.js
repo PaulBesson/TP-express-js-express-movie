@@ -1,6 +1,7 @@
 import yup from '../config/yup.config.js'
-import userRepository from '../repositories/user.repository.js';
 import bcrypt from '../config/bcrypt.config.js';
+import userRepository from '../repositories/user.repository.js';
+import filmRepository from '../repositories/film.repository.js';
 
 
 const userSchema = yup.object().shape({
@@ -39,8 +40,12 @@ const showSignup = async (req, res, next) => {
 
 const showAccount = async (req, res, next) => {
 	if (req.session.user) {
+		const films = await filmRepository.findFavorites(req.session.user.id);
+		console.log(films);
+		
 		res.render('account', {
 			user: req.session.user,
+			films,
 			erreurs: null
 		})
 	} else {
