@@ -40,12 +40,10 @@ const showSignup = async (req, res, next) => {
 
 const showAccount = async (req, res, next) => {
 	if (req.session.user) {
-		const films = await filmRepository.findFavorites(req.session.user.id);
-		console.log(films);
 		
 		res.render('account', {
 			user: req.session.user,
-			films,
+			favorites: req.session.favorites,
 			erreurs: null
 		})
 	} else {
@@ -53,11 +51,39 @@ const showAccount = async (req, res, next) => {
 	}
 }
 
+const addFavorites = async (req, res, next) => {
+	if (req.session.user) {
+		await filmRepository.addFavorites(req.session.user.id, req.params.filmId);
+		req.session.favorites = await filmRepository.findFavorites(req.session.user.id);
+		res.render('account', {
+			user: req.session.user,
+			favorites: req.session.favorites,
+			erreurs: null
+		})
+	} else {
+		res.redirect('/');
+	}
+}
+
+const removeFavorites = async (req, res, next) => {
+	if (req.session.user) {
+		await filmRepository.removeFavorites(req.session.user.id, req.params.filmId);
+		req.session.favorites = await filmRepository.findFavorites(req.session.user.id);
+		res.render('account', {
+			user: req.session.user,
+			favorites: req.session.favorites,
+			erreurs: null
+		})
+	} else {
+		res.redirect('/');
+	}
+}
+
 const disconnect = async (req, res, next) => {
 	if (req.session.user) {
 		req.session.destroy();
 	}
-	res.redirect('/')
+	res.redirect('/');
 }
 
 const addUser = async (req, res, next) => {
@@ -88,6 +114,7 @@ const loginUser = async (req, res, next) => {
 			req.session.destroy();
 		}
 		req.session.user = user;
+		req.session.favorites = await filmRepository.findFavorites(req.session.user.id);
 	}
 	res.redirect('/');
 }
@@ -98,4 +125,4 @@ const remove = async (req, res, next) => {
 	res.redirect('/user/login');
 }
 
-export default { showLogin, showSignup, addUser, loginUser, remove, showAccount, disconnect };
+export default { showLogin, showSignup, addUser, loginUser, remove, showAccount, disconnect, addFavorites, removeFavorites };

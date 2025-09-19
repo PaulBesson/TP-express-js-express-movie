@@ -16,12 +16,12 @@
 				<div class="flex flex-wrap align-center gap-5">
 					<% for (const film of films) { %>
 						<a href="http://localhost:3000/film/presentation/<%= film.id %>" class="w-56 border rounded-lg p-3 text-center bg-white/5 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105">
-								<h3 class="text-white py-2">
-									<%= film.title %>
-								</h3>
-								<img src="<%= film.image %>" alt="<% film.title %>" class="w-full h-64 object-contain">
-							<% } %>
+							<h3 class="text-white py-2">
+								<%= film.title %>
+							</h3>
+							<img src="<%= film.image %>" alt="<% film.title %>" class="w-full h-64 object-contain">
 						</a>
+							<% } %>
 				</div>
 			</section>
 		</main>

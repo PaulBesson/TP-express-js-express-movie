@@ -6,10 +6,12 @@ const show = async (req, res, next) => {
 	} else {
 
 		const films = await filmRepository.findAll()
+		const favorites = await filmRepository.findFavorites(req.session.user.id);
+		req.session.favorites = favorites;
 		if (films[0]) {
-			
 			res.render('index', {
 				user: req.session.user,
+				favorites: req.session.favorites,
 				films,
 				erreurs: null
 			})
@@ -26,11 +28,13 @@ const show = async (req, res, next) => {
 const showFilmById = async (req, res, next) => {
 	if (req.session.user) {
 		const film = await filmRepository.findById(req.params.id);
-
 		if (film) {
-			// console.log(film)
+			if (!req.session.favorites) {
+				req.session.favorites = await filmRepository.findFavorites(req.session.user.id);
+			}
 			res.render('presentation', {
 				user: req.session.user,
+				favorites: req.session.favorites,
 				film
 			})
 		}
@@ -41,10 +45,6 @@ const showFilmById = async (req, res, next) => {
 	else {
 		res.redirect('/');
 	}
-}
-
-const showFavorites = async (req, res, next) => {
-
 }
 
 const add = async (req, res, next) => {
@@ -81,4 +81,4 @@ const remove = async (req, res, next) => {
 	res.redirect('/film')
 }
 
-export default { show, add, remove, showFavorites, showFilmById };
+export default { show, add, remove, showFilmById };

@@ -19,14 +19,16 @@
 					Favorites
 				</h1>
 				<div class="flex flex-wrap justify-center gap-5">
-					<% if (films[0]) { %>
-					<% for (const film of films) { %>
+					<% if (favorites[0]) { %>
+					<% for (const film of favorites) { %>
 						<a href="http://localhost:3000/film/presentation/<%= film.id %>"
 							class="w-56 border rounded-lg p-3 text-center bg-white/5 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105">
 							<h3 class="text-white py-2">
 								<%= film.title %>
 							</h3>
-							<img src="<%= film.image %>" alt="<% film.title %>" class="w-full h-64 object-contain">
+							<% console.log(`image path : ${film.image}`); %>
+							<% const imagePath = film.image && film.image.startsWith('..') ? film.image.replace(/^\.{1,2}\//, '/') : film.image; %>
+							<img src="<%= imagePath %>" alt="<%= film.title %>" class="w-full h-64 object-contain">
 							<% } %>
 						</a>
 						<% } else { %>

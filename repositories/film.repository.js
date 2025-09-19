@@ -49,8 +49,6 @@ const findFavorites = async (userId) => {
 	const SELECT = "SELECT films.* FROM films JOIN favoris on favoris.id_film = films.id JOIN users on users.id = favoris.id_user WHERE users.id = ?;"
 	try {
 		const resultat = await connection.query(SELECT, [userId]);
-		console.log(resultat);
-		
 		if (resultat[0].length > 0) {
 			return resultat[0]
 		}
@@ -59,6 +57,28 @@ const findFavorites = async (userId) => {
 		console.log(error);
 	}
 	return [];
+}
+
+const addFavorites = async (userId, filmId) => {
+	const INSERT = "INSERT INTO favoris values (null, ?, ?)";
+	try {
+		const resultat = await connection.query(INSERT, [userId, filmId])
+		return resultat[0];
+	} catch (error) {
+		console.log(error);
+		return null
+	}
+}
+
+const removeFavorites = async (userId, filmId) => {
+	const DELETE = "DELETE FROM favoris WHERE id_user = ? AND id_film = ?";
+	try {
+		const resultat = await connection.query(DELETE, [userId, filmId]);
+		return resultat[0];
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
 }
 
 const update = async (film) => {
@@ -75,4 +95,4 @@ const update = async (film) => {
 	return null;
 }
 
-export default { findAll, save, deleteById, findById, findFavorites, update }
+export default { findAll, save, deleteById, findById, findFavorites, addFavorites, removeFavorites, update }

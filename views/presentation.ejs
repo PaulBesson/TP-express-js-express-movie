@@ -20,6 +20,12 @@
 						</h2>
 						<img src="../<%= film.image %>" alt="<% film.title %>" class="w-full h-96 object-contain">
 						<p class="text-white"><%= film.description %></p>
+						<% console.log('favorites:', favorites); %>
+						<% if (favorites.some(f => f.id == film.id)) { %>
+							<a href="/user/removeFavorites/<%= film.id %>" class="text-white text-center bg-red-600 border inline-block px-4 py-2 rounded-lg hover:bg-red-500">Remove from favorites</a>
+							<% } else { %>
+							<a href="/user/addFavorites/<%= film.id %>" class="text-white text-center bg-blue-600 border inline-block px-4 py-2 rounded-lg hover:bg-blue-500">Add to favorites</a>
+						<% } %>
 					</div>
 			</section>
 		</main>
