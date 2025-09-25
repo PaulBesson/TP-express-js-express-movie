@@ -50,17 +50,14 @@ INSERT INTO films (id, title, image, description, dateSortie, genre) VALUES
 (null, "La La Land", "../images/lalaland.jpg", "Une actrice en devenir et un musicien de jazz tombent amoureux à Los Angeles, tout en poursuivant leurs rêves.", '2016-12-29', "Romance"),
 (null, "The Grand Budapest Hotel", "../images/grandbudapest.jpg", "Les aventures d'un concierge légendaire et de son jeune protégé dans un hôtel mythique de l'Europe de l'Est.", '2014-03-07', "Comédie");
 
--- Bernardo Rapido's favorites
 INSERT INTO favoris (id, id_user, id_film) VALUES
-(null, 2, 1),  -- Bernardo Rapido likes "Pixie & Woods"
-(null, 2, 3);  -- Bernardo Rapido likes "The Dark Knight"
+(null, 2, 1),
+(null, 2, 3);
 
--- Bernardito Rapidito's favorites
 INSERT INTO favoris (id, id_user, id_film) VALUES
-(null, 3, 2),  -- Bernardito Rapidito likes "The Shawshank Redemption"
-(null, 3, 4);  -- Bernardito Rapidito likes "Interstellar"
+(null, 3, 2),
+(null, 3, 4);
 
--- Bernardipito Rapidipito's favorites
 INSERT INTO favoris (id, id_user, id_film) VALUES
-(null, 4, 1),  -- Bernardipito Rapidipito likes "Pixie & Woods"
-(null, 4, 2);  -- Bernardipito Rapidipito likes "The Shawshank Redemption"
+(null, 4, 1),
+(null, 4, 2);
